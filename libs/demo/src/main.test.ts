@@ -8,4 +8,10 @@ describe('main', () => {
 - b (Line: 2)
 - c (Line: 3)`);
   });
+
+  test('case 2', () => {
+    expect(main(cases.case2)).toEqual(`Unused Variables:
+- z (Line: 3)
+- sum (Line: 4)`);
+  });
 });

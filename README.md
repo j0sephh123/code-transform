@@ -59,6 +59,7 @@ Expected Output:
 ```
 Unused Variables:
 - z (Line: 3)
+- sum (Line: 4)
 ```
 
 ### Sample 3: Functions and Unused Parameters

@@ -2,6 +2,7 @@ import { simple } from 'acorn-walk';
 import { parseSourceCode } from './parse';
 import type { Store } from './store';
 import print from './print';
+import ArrayUtils from './utils/ArrayUtils';
 
 export default function main(sourceCode: string) {
   const store: Store = {
@@ -16,6 +17,11 @@ export default function main(sourceCode: string) {
       store.variables.push({
         line,
         name,
+      });
+    },
+    BinaryExpression(node) {
+      [node.left.name, node.right.name].forEach((variable) => {
+        ArrayUtils.deleteObject(store.variables, variable);
       });
     },
   };
