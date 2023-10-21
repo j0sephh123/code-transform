@@ -1,4 +1,4 @@
-import { Store } from './store';
+import type { Store } from './models/VariableStore';
 
 export default function print(input: Store['variables']) {
   return `Unused Variables:
