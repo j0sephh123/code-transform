@@ -9,9 +9,20 @@ export default function main(sourceCode: string) {
 
   function VariableDeclaration(node) {
     const line = node.loc.start.line;
-    const name = node.declarations[0].id.name;
+    const id = node.declarations[0].id;
 
-    store.add({ line, name });
+    if (id.type === 'ObjectPattern') {
+      id.properties.forEach((property) => {
+        store.add({
+          name: property.value.name,
+          line: property.value.loc.start.line,
+        });
+      });
+    } else if (id.type === 'Identifier') {
+      const name = id.name;
+
+      store.add({ line, name });
+    }
   }
   function BinaryExpression(node, ancestors) {
     const functionDeclaration = ancestors.find(
@@ -52,6 +63,11 @@ export default function main(sourceCode: string) {
 
     node.arguments.forEach((argument) => store.remove(argument.name));
   }
+  function VariableDeclarator(node) {
+    if (node.id.type === 'ObjectPattern') {
+      store.remove(node.init.name);
+    }
+  }
   // function FunctionDeclaration(node) {}
 
   const variableDeclarationLogger = new FunctionLogger(VariableDeclaration);
@@ -59,6 +75,7 @@ export default function main(sourceCode: string) {
   const binaryExpressionLogger = new FunctionLogger(BinaryExpression);
   const memberExpressionLogger = new FunctionLogger(MemberExpression);
   const callExpressionLogger = new FunctionLogger(CallExpression);
+  const variableDeclaratorLogger = new FunctionLogger(VariableDeclarator);
 
   const visitors = {
     VariableDeclaration: (node) => variableDeclarationLogger.invoke([node]),
@@ -69,6 +86,7 @@ export default function main(sourceCode: string) {
     MemberExpression: (node) => memberExpressionLogger.invoke([node]),
     CallExpression: (node, ancestors) =>
       callExpressionLogger.invoke([node, ancestors]),
+    VariableDeclarator: (node) => variableDeclaratorLogger.invoke([node]),
   };
 
   ancestor(parseSourceCode(sourceCode), visitors);

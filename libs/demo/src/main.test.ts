@@ -42,6 +42,7 @@ describe('main', () => {
 
   test('case 8', () => {
     expect(main(cases.case8)).toEqual(`Unused Variables:
+- name (Line: 5)
 - age (Line: 5)
 - job (Line: 5)`);
   });
