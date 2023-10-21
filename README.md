@@ -92,3 +92,113 @@ Expected Output:
 Unused Variables:
 - None
 ```
+
+### Sample 5: Nested Scopes
+
+```javascript
+function outer(x) {
+  const y = 10;
+  function inner(z) {
+    return x + z;
+  }
+  inner(5);
+}
+```
+
+Expected Output:
+
+```
+Unused Variables:
+- y (Line: 2)
+```
+
+### Sample 6: Loops and Conditionals
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  const j = i + 1;
+}
+const k = 20;
+if (k > 10) {
+  const l = 30;
+}
+```
+
+Expected Output:
+
+```
+Unused Variables:
+- j (Line: 2)
+- l (Line: 7)
+```
+
+### Sample 7: Callbacks and Higher Order Functions
+
+```javascript
+const nums = [1, 2, 3];
+nums.forEach((num, index, arr) => {
+  console.log(num);
+});
+```
+
+Expected Output:
+
+```
+Unused Variables:
+- index (Line: 3)
+- arr (Line: 3)
+```
+
+### Sample 8: Object Destructuring
+
+```javascript
+const person = {
+  name: 'Alice',
+  age: 30,
+};
+const { name, age, job } = person;
+```
+
+Expected Output:
+
+```
+Unused Variables:
+- age (Line: 5)
+- job (Line: 5)
+```
+
+### Sample 9: Array Destructuring
+
+```javascript
+const coords = [10, 20];
+const [x, y, z] = coords;
+```
+
+Expected Output:
+
+```
+Unused Variables:
+- y (Line: 3)
+- z (Line: 3)
+```
+
+### Sample 10: Multiple Scenarios
+
+```javascript
+const a = 1,
+  b = 2,
+  c = 3;
+function add(d, e) {
+  return d;
+}
+add(a, b);
+```
+
+Expected Output:
+
+```
+Unused Variables:
+- b (Line: 1)
+- c (Line: 1)
+- e (Line: 2)
+```
