@@ -7,6 +7,4 @@ export type Store = {
   variables: StoreVariable[];
 };
 
-export const store: Store = {
-  variables: [],
-};
+
