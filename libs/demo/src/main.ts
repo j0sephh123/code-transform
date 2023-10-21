@@ -1,4 +1,4 @@
-import { simple } from 'acorn-walk';
+import { ancestor } from 'acorn-walk';
 import { parseSourceCode } from './parse';
 import print from './print';
 import VariableStore from './models/VariableStore';
@@ -13,23 +13,40 @@ export default function main(sourceCode: string) {
 
     store.add({ line, name });
   }
-  function BinaryExpression(node) {
-    if (!store.isEmpty()) {
-      [node.left.name, node.right.name].forEach((nameIdentifier) => {
-        store.remove(nameIdentifier);
+  function BinaryExpression(node, ancestors) {
+    const functionDeclaration = ancestors.find(
+      ({ type }) => type === 'FunctionDeclaration'
+    );
+
+    if (functionDeclaration) {
+      functionDeclaration.params.forEach(({ name, loc }) => {
+        store.add({
+          name,
+          line: loc.start.line,
+        });
       });
     }
+
+    [node.left.name, node.right.name].forEach((nameIdentifier) => {
+      store.remove(nameIdentifier);
+    });
   }
+  // function FunctionDeclaration(node) {}
 
   const variableDeclarationLogger = new FunctionLogger(VariableDeclaration);
+  // const functionDeclarationLogger = new FunctionLogger(FunctionDeclaration);
   const binaryExpressionLogger = new FunctionLogger(BinaryExpression);
 
   const visitors = {
-    VariableDeclaration: (n) => variableDeclarationLogger.invoke(n),
-    BinaryExpression: (n) => binaryExpressionLogger.invoke(n),
+    VariableDeclaration: (node, ancestors) =>
+      variableDeclarationLogger.invoke([node, ancestors]),
+    // FunctionDeclaration: (node, ancestors) =>
+    //   functionDeclarationLogger.invoke([node, ancestors]),
+    BinaryExpression: (node, ancestors) =>
+      binaryExpressionLogger.invoke([node, ancestors]),
   };
 
-  simple(parseSourceCode(sourceCode), visitors);
+  ancestor(parseSourceCode(sourceCode), visitors);
 
   return print(store.getVariables());
 }

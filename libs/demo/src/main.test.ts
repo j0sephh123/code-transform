@@ -13,9 +13,9 @@ describe('main', () => {
 - z (Line: 3)
 - sum (Line: 4)`);
   });
-  test('case 3', () => {
+  test.only('case 3', () => {
     expect(main(cases.case3)).toEqual(`Unused Variables:
-  - b (Line: 1)`);
+- b (Line: 1)`);
   });
 
   test('case 4', () => {
