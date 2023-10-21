@@ -4,10 +4,10 @@ Learn how to traverse and transform AST.
 
 ## Tools
 
-- acorn - parse
+- [acorn](https://github.com/acornjs/acorn) - parse
 - acorn-walk - traverse (still part of acorn package)
-- astring - generate
-- [estree spec](https://web.archive.org/web/20210314002546/https://developer.mozilla. org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API)
+- [astring](https://github.com/davidbonnet/astring) - generate
+- [estree spec](https://web.archive.org/web/20210314002546/https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API)
 - [ast explorer](https://astexplorer.net/)
 
 ## Exercises
