@@ -28,7 +28,7 @@ Develop a basic code linter that analyzes a JavaScript source file to identify a
 4. Identify variables that are declared but not used.
 5. Generate a report listing the unused variables along with their line numbers.
 
-### Sample 1: Simple Variable Declarations
+### Sample 1: Simple Variable Declarations [x]
 
 ```javascript
 const a = 1;
