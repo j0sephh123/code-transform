@@ -11,6 +11,7 @@ export default function main(sourceCode: string) {
     const line = node.loc.start.line;
     const id = node.declarations[0].id;
 
+    // TODO do similar to the array pattern
     if (id.type === 'ObjectPattern') {
       id.properties.forEach((property) => {
         store.add({
@@ -66,6 +67,15 @@ export default function main(sourceCode: string) {
   function VariableDeclarator(node) {
     if (node.id.type === 'ObjectPattern') {
       store.remove(node.init.name);
+    }
+    if (node.id.type === 'ArrayPattern') {
+      store.remove(node.init.name);
+      node.id.elements.forEach(({ name, loc }) => {
+        store.add({
+          name,
+          line: loc.start.line,
+        });
+      });
     }
   }
   // function FunctionDeclaration(node) {}

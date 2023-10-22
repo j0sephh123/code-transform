@@ -49,14 +49,15 @@ describe('main', () => {
 
   test('case 9', () => {
     expect(main(cases.case9)).toEqual(`Unused Variables:
-- y (Line: 3)
-- z (Line: 3)`);
+- x (Line: 2)
+- y (Line: 2)
+- z (Line: 2)`);
   });
 
   test('case 10', () => {
     expect(main(cases.case10)).toEqual(`Unused Variables:
-- b (Line: 1)
 - c (Line: 1)
-- e (Line: 2)`);
+- e (Line: 2)
+    `);
   });
 });

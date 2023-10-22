@@ -199,7 +199,88 @@ Expected Output:
 
 ```
 Unused Variables:
-- b (Line: 1)
 - c (Line: 1)
 - e (Line: 2)
+```
+
+### Case 11: Variable used in nested function
+
+```javascript
+test('case 11', () => {
+  const case11 = `
+    let a = 1;
+    function outer() {
+      function inner() {
+        console.log(a);
+      }
+      inner();
+    }
+    outer();
+  `;
+  expect(main(case11)).toEqual(`Unused Variables:
+  - None`);
+});
+```
+
+### Case 12: Variables declared but never used within a class
+
+```javascript
+test('case 12', () => {
+  const case12 = `
+    class MyClass {
+      constructor() {
+        this.a = 1;
+        this.b = 2;
+      }
+      myMethod() {
+        console.log(this.a);
+      }
+    }
+  `;
+  expect(main(case12)).toEqual(`Unused Variables:
+  - b (Line: 5)`);
+});
+```
+
+### Case 13: Unused return value from function
+
+```javascript
+test('case 13', () => {
+  const case13 = `
+    function doSomething() {
+      return 'I did something';
+    }
+    doSomething();
+  `;
+  expect(main(case13)).toEqual(`Unused Variables:
+  - None`);
+});
+```
+
+### Case 14: Variable only used in a comment
+
+```javascript
+test('case 14', () => {
+  const case14 = `
+    let a = 1;
+    // This is a comment mentioning a
+  `;
+  expect(main(case14)).toEqual(`Unused Variables:
+  - a (Line: 2)`);
+});
+```
+
+### Case 15: Unused variable in for-of loop
+
+```javascript
+test('case 15', () => {
+  const case15 = `
+    const arr = [1, 2, 3];
+    for (const a of arr) {
+      console.log('Looping');
+    }
+  `;
+  expect(main(case15)).toEqual(`Unused Variables:
+  - a (Line: 3)`);
+});
 ```
