@@ -1,4 +1,7 @@
-export const arrowFunction = 'const sum = (a, b) => a + b;';
+export const arrowFunction = `const sum = (a, b) => {
+  return a + b;
+};
+`;
 export const functionDeclaration = `function sum(a, b) {
   return a + b;
 }`;
