@@ -1,8 +1,8 @@
 import { ancestor, simple } from 'acorn-walk';
-import { parseSourceCode } from './parse';
+import parseSourceCode from '../parseSourceCode';
 import print from './print';
 import VariableStore from './models/VariableStore';
-import FunctionLogger from './models/FunctionLogger';
+import FunctionLogger from '../FunctionLogger';
 
 export default function main(sourceCode: string) {
   const store = new VariableStore();
