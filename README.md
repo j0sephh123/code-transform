@@ -16,6 +16,8 @@ Certainly. Given your interest in improving as a developer, working with Abstrac
 
 ### Exercise: Create a Code Linter for Detecting Unused Variables
 
+project - `libs/demo/src/unusedVars`
+
 #### Objective:
 
 Develop a basic code linter that analyzes a JavaScript source file to identify and report any unused variables.
@@ -27,3 +29,5 @@ Develop a basic code linter that analyzes a JavaScript source file to identify a
 3. Track references to each declared variable.
 4. Identify variables that are declared but not used.
 5. Generate a report listing the unused variables along with their line numbers.
+
+### 
