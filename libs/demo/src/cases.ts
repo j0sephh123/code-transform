@@ -61,3 +61,31 @@ function add(d, e) {
 }
 add(a, b);
 `;
+
+export const case11 = `let a = 1;
+function outer() {
+  function inner() {
+    console.log(a);
+  }
+  inner();
+}
+outer();`;
+export const case12 = `class MyClass {
+  constructor() {
+    this.a = 1;
+    this.b = 2;
+  }
+  myMethod() {
+    console.log(this.a);
+  }
+}`;
+export const case13 = `function doSomething() {
+  return 'I did something';
+}
+doSomething();`;
+export const case14 = `let a = 1;
+// This is a comment mentioning a`;
+export const case15 = `const arr = [1, 2, 3];
+for (const a of arr) {
+  console.log('Looping');
+}`;

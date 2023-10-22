@@ -57,7 +57,30 @@ describe('main', () => {
   test('case 10', () => {
     expect(main(cases.case10)).toEqual(`Unused Variables:
 - c (Line: 1)
-- e (Line: 2)
-    `);
+- e (Line: 2)`);
+  });
+  test('case 11', () => {
+    expect(main(cases.case11)).toEqual(`Unused Variables:
+  - None`);
+  });
+
+  test('case 12', () => {
+    expect(main(cases.case12)).toEqual(`Unused Variables:
+  - b (Line: 5)`);
+  });
+
+  test('case 13', () => {
+    expect(main(cases.case13)).toEqual(`Unused Variables:
+  - None`);
+  });
+
+  test('case 14', () => {
+    expect(main(cases.case14)).toEqual(`Unused Variables:
+  - a (Line: 1)`);
+  });
+
+  test('case 15', () => {
+    expect(main(cases.case15)).toEqual(`Unused Variables:
+  - a (Line: 3)`);
   });
 });
