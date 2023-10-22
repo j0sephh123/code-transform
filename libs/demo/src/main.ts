@@ -76,6 +76,9 @@ export default function main(sourceCode: string) {
           }
         );
       },
+      ReturnStatement(innerNode: any) {
+        store.remove(innerNode.argument.name);
+      },
     });
 
     // TODO check for binary expressions and return types here instead of

@@ -53,9 +53,7 @@ export const case9 = `const coords = [10, 20];
 const [x, y, z] = coords;
 `;
 
-export const case10 = `const a = 1,
-  b = 2,
-  c = 3;
+export const case10 = `const a = 1, b = 2, c = 3;
 function add(d, e) {
   return d;
 }
