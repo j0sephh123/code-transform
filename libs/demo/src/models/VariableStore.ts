@@ -28,6 +28,7 @@ export default class VariableStore implements VariableStoreI {
   }
   public add(storeVariable: Parameters<VariableStoreI['add']>[0]) {
     if (!this.exists(storeVariable.name)) {
+      console.log('adding', storeVariable.name);
       this._variables.push(storeVariable);
     }
   }

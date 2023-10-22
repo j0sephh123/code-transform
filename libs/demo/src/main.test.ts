@@ -15,6 +15,7 @@ describe('main', () => {
   });
   test('case 3', () => {
     expect(main(cases.case3)).toEqual(`Unused Variables:
+- multiply (Line: 1)
 - b (Line: 1)`);
   });
 
@@ -25,7 +26,8 @@ describe('main', () => {
 
   test('case 5', () => {
     expect(main(cases.case5)).toEqual(`Unused Variables:
-- y (Line: 2)`);
+- y (Line: 2)
+- outer (Line: 1)`);
   });
 
   test('case 6', () => {
@@ -61,26 +63,37 @@ describe('main', () => {
   });
   test('case 11', () => {
     expect(main(cases.case11)).toEqual(`Unused Variables:
-  - None`);
+- None`);
   });
 
   test('case 12', () => {
     expect(main(cases.case12)).toEqual(`Unused Variables:
-  - b (Line: 5)`);
+- MyClass (Line: 1)`);
   });
 
   test('case 13', () => {
     expect(main(cases.case13)).toEqual(`Unused Variables:
-  - None`);
+- None`);
   });
 
   test('case 14', () => {
     expect(main(cases.case14)).toEqual(`Unused Variables:
-  - a (Line: 1)`);
+- a (Line: 1)`);
   });
 
   test('case 15', () => {
     expect(main(cases.case15)).toEqual(`Unused Variables:
-  - a (Line: 3)`);
+- a (Line: 2)`);
+  });
+  test('case 16', () => {
+    expect(main(cases.case16)).toEqual(`Unused Variables:
+- num2 (Line: 2)
+- result (Line: 3)`);
+  });
+
+  test('case 17', () => {
+    expect(main(cases.case17)).toEqual(`Unused Variables:
+- array2 (Line: 2)
+- combined (Line: 3)`);
   });
 });

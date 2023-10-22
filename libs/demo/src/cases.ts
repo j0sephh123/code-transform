@@ -87,3 +87,11 @@ export const case15 = `const arr = [1, 2, 3];
 for (const a of arr) {
   console.log('Looping');
 }`;
+export const case16 = `const num1 = 10;
+const num2 = 20;
+const result = num1 * 2;
+`;
+export const case17 = `const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const combined = [...array1];
+`;

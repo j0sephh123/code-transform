@@ -31,6 +31,7 @@ export default function main(sourceCode: string) {
       });
     }
 
+    store.remove(node.callee.name);
     node.arguments.forEach((argument) => store.remove(argument.name));
   }
   function VariableDeclarator(node) {
@@ -61,6 +62,13 @@ export default function main(sourceCode: string) {
     }
   }
   function FunctionDeclaration(node, ancestors) {
+    // function
+    store.add({
+      name: node.id.name,
+      line: node.id.loc.start.line,
+    });
+
+    // parameters
     node.params.forEach((param) => {
       store.add({
         name: param.name,
@@ -84,6 +92,18 @@ export default function main(sourceCode: string) {
     // TODO check for binary expressions and return types here instead of
     // BinaryExpression or ReturnStatement
   }
+  function ClassDeclaration(node) {
+    store.add({
+      name: node.id.name,
+      line: node.id.loc.start.line,
+    });
+  }
+  function ForOfStatement(node) {
+    store.remove(node.right.name);
+  }
+  function SpreadElement(node) {
+    store.remove(node.argument.name);
+  }
 
   // const variableDeclarationLogger = new FunctionLogger(VariableDeclaration);
   const functionDeclarationLogger = new FunctionLogger(FunctionDeclaration);
@@ -91,6 +111,9 @@ export default function main(sourceCode: string) {
   const memberExpressionLogger = new FunctionLogger(MemberExpression);
   const callExpressionLogger = new FunctionLogger(CallExpression);
   const variableDeclaratorLogger = new FunctionLogger(VariableDeclarator);
+  const classDeclarationLogger = new FunctionLogger(ClassDeclaration);
+  const forOfStatementLogger = new FunctionLogger(ForOfStatement);
+  const spreadElementLogger = new FunctionLogger(SpreadElement);
 
   const visitors = {
     // VariableDeclaration: (node) => variableDeclarationLogger.invoke([node]),
@@ -101,6 +124,9 @@ export default function main(sourceCode: string) {
     CallExpression: (node, ancestors) =>
       callExpressionLogger.invoke([node, ancestors]),
     VariableDeclarator: (node) => variableDeclaratorLogger.invoke([node]),
+    ClassDeclaration: (node) => classDeclarationLogger.invoke([node]),
+    ForOfStatement: (node) => forOfStatementLogger.invoke([node]),
+    SpreadElement: (node) => spreadElementLogger.invoke([node]),
   };
 
   ancestor(parseSourceCode(sourceCode), visitors);
