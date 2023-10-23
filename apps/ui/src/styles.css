@@ -6,3 +6,10 @@ body {
   box-sizing: border-box;
   color: #fff;
 }
+.flex {
+  display: flex;
+}
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
