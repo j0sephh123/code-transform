@@ -23,6 +23,7 @@ export default function arrowFunction(ast: acorn.Node) {
     body: [
       {
         type: 'VariableDeclaration',
+        kind: 'const',
         declarations: [
           {
             type: 'VariableDeclarator',
@@ -32,19 +33,13 @@ export default function arrowFunction(ast: acorn.Node) {
             },
             init: {
               type: 'ArrowFunctionExpression',
-              id: null,
-              expression: false,
-              generator: false,
-              async: false,
               params: state.params,
               body: state.body,
             },
           },
         ],
-        kind: 'const',
       },
     ],
-    sourceType: 'module',
   };
 
   const generatedResult = generate(result);

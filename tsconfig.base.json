@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@code-transform/demo": ["libs/demo/src/index.ts"]
+      "@libs/transform-code": ["libs/transform-code/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
